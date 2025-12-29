@@ -78,8 +78,8 @@ The build artifacts will be stored in the `dist/` directory.
 
 **Mohamd Abd-Elsattar**
 *   **Role**: Full Stack Engineer (.NET & Angular)
-*   **Email**: [Your Email Here]
-*   **LinkedIn**: [Your LinkedIn Profile]
+*   **Email**: [mohamd.abdelsattar.hamed@gmail.com]
+*   **LinkedIn**: [https://github.com/Abd-Elsattar]
 
 ---
 *Built with ❤️ and ☕ by Mohamd Abd-Elsattar*
