@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -34,8 +34,11 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npx ng build --base-href /Portfolio/
+        run: |
+          npx ng build --base-href /Portfolio/
+          cp dist/portfolio/browser/index.html dist/portfolio/browser/404.html
 
+      # Option 1: Deploy using GitHub Actions (Standard)
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
@@ -47,3 +50,10 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      # Option 2: Push to gh-pages branch (Legacy/Fallback support)
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist/portfolio/browser
