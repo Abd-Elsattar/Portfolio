@@ -1,0 +1,47 @@
+<section class="py-32 relative bg-surface/30">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-text-main">Engineering Mindset</h2>
+      <p class="text-text-muted max-w-2xl mx-auto">It's not just about writing code. It's about how I approach problems,
+        design systems, and deliver value.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 perspective-1000">
+      <div *ngFor="let item of items" #card (mousemove)="onMouseMove($event, card)" (mouseleave)="onMouseLeave(card)"
+        class="group p-8 rounded-2xl bg-surface/50 border border-border/50 hover:bg-surface hover:border-primary/50 transition-all duration-200 ease-out relative overflow-hidden preserve-3d shadow-sm hover:shadow-xl">
+
+        <!-- Depth layers for parallax feel -->
+        <div
+          class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+        </div>
+
+        <div
+          class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity transform translate-z-10">
+          <svg class="w-24 h-24" [ngClass]="item.color === 'primary' ? 'text-primary' : 'text-accent'" fill="none"
+            stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" [attr.d]="item.bgIcon"></path>
+          </svg>
+        </div>
+
+        <div class="relative transform translate-z-20">
+          <div
+            class="w-12 h-12 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg"
+            [ngClass]="item.color === 'primary' ? 'bg-primary/20 text-primary' : 'bg-accent/20 text-accent'">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" [attr.d]="item.mainIcon"></path>
+            </svg>
+          </div>
+
+          <h3 class="text-xl font-bold mb-3 text-text-main group-hover:text-primary transition-colors"
+            [ngClass]="item.color === 'primary' ? 'group-hover:text-primary' : 'group-hover:text-accent'">
+            {{item.title}}
+          </h3>
+
+          <p class="text-text-muted leading-relaxed">
+            {{item.description}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Modern Tech Theme - Light (Clean, Swiss Style) */
+    --background: 255 255 255;
+    --surface: 248 250 252;    /* Slate 50 */
+    --surface-hover: 241 245 249; /* Slate 100 */
+    --text-main: 15 23 42;     /* Slate 900 */
+    --text-muted: 71 85 105;   /* Slate 600 */
+    --border: 226 232 240;     /* Slate 200 */
+    --primary: 37 99 235;      /* Blue 600 */
+    --accent: 79 70 229;       /* Indigo 600 */
+    --code-bg: 30 41 59;       /* Slate 800 */
+    --code-text: 226 232 240;  /* Slate 200 */
+    --grid-color: 226 232 240; /* Slate 200 */
+  }
+
+  .dark {
+    /* Modern Tech Theme - Dark (IDE/Terminal Style) */
+    --background: 10 10 12;    /* Deep Black/Blue */
+    --surface: 24 24 27;       /* Zinc 900 */
+    --surface-hover: 39 39 42; /* Zinc 800 */
+    --text-main: 250 250 250;  /* Zinc 50 */
+    --text-muted: 161 161 170; /* Zinc 400 */
+    --border: 39 39 42;        /* Zinc 800 */
+    --primary: 59 130 246;     /* Blue 500 */
+    --accent: 168 85 247;      /* Purple 500 */
+    --code-bg: 0 0 0;          /* Black */
+    --code-text: 167 243 208;  /* Emerald 200 */
+    --grid-color: 39 39 42;    /* Zinc 800 */
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans antialiased overflow-x-hidden;
+    background-color: rgb(var(--background));
+    color: rgb(var(--text-main));
+  }
+
+  /* Typography Overrides for Tech Feel */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight font-bold;
+    color: rgb(var(--text-main));
+  }
+}
+
+@layer utilities {
+  /* Technical Grid Background */
+  .bg-grid-pattern {
+    background-size: 40px 40px;
+    background-image: linear-gradient(to right, rgb(var(--grid-color) / 0.1) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgb(var(--grid-color) / 0.1) 1px, transparent 1px);
+    /* mask-image removed to eliminate circular vignette effect */
+  }
+
+  /* Dot Pattern */
+  .bg-dot-pattern {
+    background-size: 24px 24px;
+    background-image: radial-gradient(rgb(var(--grid-color) / 0.3) 1px, transparent 1px);
+    /* mask-image removed to eliminate circular vignette effect */
+  }
+
+  /* Glassmorphism Refined */
+  .glass-header {
+    @apply backdrop-blur-xl border-b;
+    background-color: rgb(var(--background) / 0.8);
+    border-color: rgb(var(--border));
+  }
+}
+
+/* Selection Style */
+::selection {
+  background-color: rgb(var(--primary) / 0.3);
+  color: rgb(var(--text-main));
+}
+
+/* Custom Scrollbar - Slim & Techy */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--border));
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--text-muted));
+}

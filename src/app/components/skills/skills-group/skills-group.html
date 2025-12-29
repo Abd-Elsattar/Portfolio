@@ -1,0 +1,70 @@
+<section id="skills" class="py-32 bg-slate-50 dark:bg-[#030303] relative overflow-hidden min-h-screen flex flex-col justify-center transition-colors duration-300">
+    <!-- Ambient Background (Adjusted for Light/Dark) -->
+    <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-indigo-500/10 dark:bg-indigo-600/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen animate-pulse-slow"></div>
+        <div class="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-purple-500/10 dark:bg-purple-600/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen animate-float"></div>
+    </div>
+
+    <div class="container mx-auto px-6 relative z-10">
+        <!-- Header -->
+        <div class="mb-24 text-center max-w-4xl mx-auto">
+            <h2 class="text-5xl md:text-7xl font-bold text-slate-900 dark:text-white mb-8 tracking-tight">
+                Tech <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400">Universe</span>
+            </h2>
+            <p class="text-slate-600 dark:text-slate-400 text-lg md:text-xl font-light leading-relaxed">
+                A carefully curated ecosystem of technologies that I command. <br class="hidden md:block" />
+                From scalable backends to immersive frontends.
+            </p>
+        </div>
+
+        <!-- Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            @for (group of skillGroups(); track group.category) {
+                <!-- Card Container -->
+                <div class="group relative rounded-3xl p-[1px] overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 bg-gradient-to-br from-white/80 to-white/40 dark:from-white/10 dark:to-white/0 shadow-xl shadow-indigo-100/50 dark:shadow-none"
+                     (mousemove)="onMouseMove($event, card)" #card>
+
+                    <!-- Spotlight Gradient (Fixed for Light Mode) -->
+                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                         style="background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(99, 102, 241, 0.15), transparent 40%);"></div>
+
+                    <!-- Inner Card Content -->
+                    <div class="relative h-full bg-white dark:bg-[#0a0a0c] rounded-[23px] p-8 overflow-hidden border border-white/50 dark:border-transparent">
+                        <!-- Subtle Grid Pattern in Card -->
+                        <div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.03]"
+                             style="background-image: radial-gradient(currentColor 1px, transparent 1px); background-size: 20px 20px; color: rgb(var(--text-muted));"></div>
+
+                        <!-- Category Header -->
+                        <div class="relative flex items-center gap-5 mb-8">
+                            <div class="w-14 h-14 rounded-2xl bg-indigo-50 dark:bg-white/5 border border-indigo-100 dark:border-white/5 flex items-center justify-center text-indigo-600 dark:text-indigo-400 group-hover:text-indigo-500 dark:group-hover:text-indigo-300 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-sm dark:shadow-none">
+                                <!-- Icons -->
+                                @if(group.category.includes('Frontend')) {
+                                   <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                                } @else if(group.category.includes('Backend')) {
+                                   <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" /></svg>
+                                } @else if(group.category.includes('DevOps')) {
+                                   <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>
+                                } @else {
+                                   <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+                                }
+                            </div>
+                            <h3 class="text-2xl font-bold text-slate-900 dark:text-white tracking-wide">{{ group.category }}</h3>
+                        </div>
+
+                        <!-- Skills Tags -->
+                        <div class="relative flex flex-wrap gap-2.5">
+                            @for (skill of group.skills; track skill) {
+                                <div class="group/tag relative">
+                                    <div class="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-lg blur opacity-0 group-hover/tag:opacity-50 transition duration-500"></div>
+                                    <span class="relative block px-3.5 py-2 bg-slate-50 dark:bg-slate-900/80 text-slate-600 dark:text-slate-300 rounded-lg text-sm font-medium border border-slate-200 dark:border-white/5 hover:text-indigo-600 dark:hover:text-white hover:border-indigo-300 dark:hover:border-white/20 transition-all cursor-default shadow-sm dark:shadow-none">
+                                        {{ skill }}
+                                    </span>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
