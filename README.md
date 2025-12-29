@@ -2,7 +2,7 @@
 
 ![Portfolio Preview](public/01.jpg)
 
-A modern, high-performance portfolio website built with **Angular 19**, **Tailwind CSS**, and **TypeScript**. This project showcases my skills, projects, and professional journey through an interactive, terminal-inspired interface.
+A modern, high-performance portfolio website built with **Angular **, **Tailwind CSS**, and **TypeScript**. This project showcases my skills, projects, and professional journey through an interactive, terminal-inspired interface.
 
 ## 🚀 Features
 
