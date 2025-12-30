@@ -27,6 +27,31 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="icon" type="image/jpeg" href="01.jpg">
+  <style>
+    #preloader {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      z-index: 9999;
+      transition: opacity .3s ease;
+    }
+    .dark #preloader { background: #0a0a0c; }
+    .preloader-inner { display: flex; align-items: center; gap: 14px; }
+    .preloader-logo {
+      width: 42px; height: 42px; border-radius: 10px;
+      background: linear-gradient(90deg, #3b82f6, #a855f7);
+      box-shadow: 0 12px 30px rgba(59,130,246,.25);
+    }
+    .preloader-pulse {
+      width: 48px; height: 48px; border-radius: 50%;
+      border: 3px solid rgba(0,0,0,.1); border-top-color: #3b82f6;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg) } }
+  </style>
   <script>
     if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark');
@@ -36,6 +61,12 @@
   </script>
 </head>
 <body>
+  <div id="preloader" aria-hidden="true">
+    <div class="preloader-inner">
+      <div class="preloader-logo"></div>
+      <div class="preloader-pulse"></div>
+    </div>
+  </div>
   <app-root></app-root>
 </body>
 </html>
