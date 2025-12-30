@@ -1,77 +1,90 @@
-import { Component, inject, signal, OnInit, OnDestroy } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, effect } from '@angular/core';
 import { DataService } from '../../../services/data.service';
+import { TerminalService } from '../../../services/terminal.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './hero.html',
-  styleUrl: './hero.css'
+  styleUrl: './hero.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class Hero implements OnInit, OnDestroy {
+export class Hero implements OnInit {
   dataService = inject(DataService);
+  terminalService = inject(TerminalService);
+
   profile = this.dataService.profile;
 
-  // Terminal Logic
-  terminalLines = signal<string[]>([]);
-  currentCommand = signal<string>('');
-  isTyping = signal<boolean>(false);
+  // Expose signals for template
+  terminalLines = this.terminalService.terminalLines;
+  currentCommand = this.terminalService.currentCommand;
+  isTyping = this.terminalService.isTyping;
 
-  private commands = [
-    { cmd: '> initialize_system --target=portfolio', output: 'System initialized. Loading core modules...' },
-    { cmd: '> whoami', output: 'Mohamd Abd-Elsattar | Junior Full Stack Using .NET & Angular' },
-    { cmd: '> stack --list', output: 'Angular, .NET Core, SQL Server' },
-    { cmd: '> current_status', output: 'Ready to build scalable solutions.' }
+  @ViewChild('terminalContainer') terminalContainer!: ElementRef<HTMLDivElement>;
+
+  constructor() {
+    // Auto-scroll effect
+    effect(() => {
+      // Track the signal
+      this.terminalLines();
+      this.currentCommand();
+
+      // Scroll after render
+      setTimeout(() => this.scrollToBottom(), 10);
+    });
+  }
+
+  private sequence = [
+    {
+      cmd: 'initialize_system --env=production',
+      output: [
+        'Loading Core Modules...',
+        '✔ Angular 19 [Loaded]',
+        '✔ .NET 9 [Loaded]',
+        '✔ SQL Server [Connected]',
+        'System initialized successfully.'
+      ]
+    },
+    {
+      cmd: 'whoami',
+      output: 'Mohamd Abd-Elsattar | Full Stack Engineer'
+    },
+    {
+      cmd: 'cat skills.json | grep "Expertise"',
+      output: [
+        '{',
+        '  "Frontend": ["Angular", "TypeScript", "Tailwind"],',
+        '  "Backend": ["ASP.NET Core", "Clean Architecture"],',
+        '  "Database": ["EF Core", "SQL Server"]',
+        '}'
+      ]
+    },
+    {
+      cmd: 'run_tests --all',
+      output: [
+        'Running unit tests...',
+        'PASS: Component Architecture',
+        'PASS: API Integration',
+        'PASS: Performance Optimization',
+        'ALL TESTS PASSED. Ready to deploy.'
+      ]
+    }
   ];
 
-  private intervalId: any;
-
   ngOnInit() {
-    this.runTerminalSequence();
+    this.startTerminal();
   }
 
-  ngOnDestroy() {
-    if (this.intervalId) clearInterval(this.intervalId);
+  async startTerminal() {
+    await this.terminalService.runSequence(this.sequence);
   }
 
-  async runTerminalSequence() {
-    for (const line of this.commands) {
-      // Type command
-      this.isTyping.set(true);
-      await this.typeCommand(line.cmd);
-      this.isTyping.set(false);
-
-      // Push command to history
-      this.terminalLines.update(lines => [...lines, line.cmd]);
-      this.currentCommand.set('');
-
-      // Wait a bit
-      await new Promise(r => setTimeout(r, 300));
-
-      // Show output
-      this.terminalLines.update(lines => [...lines, line.output, '']); // Empty string for spacing
-
-      // Wait before next command
-      await new Promise(r => setTimeout(r, 800));
+  private scrollToBottom() {
+    if (this.terminalContainer?.nativeElement) {
+      const el = this.terminalContainer.nativeElement;
+      el.scrollTop = el.scrollHeight;
     }
-  }
-
-  private typeCommand(text: string): Promise<void> {
-    return new Promise(resolve => {
-      let i = 0;
-      this.currentCommand.set('');
-
-      const typeChar = () => {
-        if (i < text.length) {
-          this.currentCommand.update(c => c + text.charAt(i));
-          i++;
-          setTimeout(typeChar, 50 + Math.random() * 50); // Random typing speed
-        } else {
-          resolve();
-        }
-      };
-
-      typeChar();
-    });
   }
 }

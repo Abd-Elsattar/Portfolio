@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ThemeService } from '../../../services/theme.service';
+import { DataService } from '../../../services/data.service';
 
 @Component({
   selector: 'app-header',
@@ -10,12 +11,10 @@ import { ThemeService } from '../../../services/theme.service';
   styleUrl: './header.css',
 })
 export class Header {
-profile() {
-throw new Error('Method not implemented.');
-}
+  themeService = inject(ThemeService);
+  dataService = inject(DataService);
+  
   isMobileMenuOpen = signal(false);
-
-  constructor(public themeService: ThemeService) {}
 
   toggleMobileMenu() {
     this.isMobileMenuOpen.update(v => !v);
