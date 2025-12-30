@@ -19,8 +19,8 @@ export class Hero implements OnInit, OnDestroy {
 
   private commands = [
     { cmd: '> initialize_system --target=portfolio', output: 'System initialized. Loading core modules...' },
-    { cmd: '> whoami', output: 'Mohamd Abd-Elsattar | Junior Full Stack Engineer' },
-    { cmd: '> stack --list', output: 'Angular, .NET Core, SQL Server, Azure, Microservices' },
+    { cmd: '> whoami', output: 'Mohamd Abd-Elsattar | Junior Full Stack Using .NET & Angular' },
+    { cmd: '> stack --list', output: 'Angular, .NET Core, SQL Server' },
     { cmd: '> current_status', output: 'Ready to build scalable solutions.' }
   ];
 

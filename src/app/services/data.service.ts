@@ -8,9 +8,9 @@ import { SkillGroup } from '../models/skill.interface';
 export class DataService {
   readonly profile = signal({
     name: 'Mohamd Abd-Elsattar',
-    role: 'Full Stack .NET Engineer',
-    headline: 'Building scalable systems with ASP.NET Core & Angular.',
-    subHeadline: 'Focused on clean architecture, performance, and real-world problem solving.',
+    role: 'Junior Full Stack .NET Engineer',
+    headline: 'Learning fast, building real projects, and mastering the fundamentals.',
+    subHeadline: 'Clean code, solid architecture, and relentless curiosity in Angular & .NET.',
     location: 'Cairo, Egypt',
     email: 'mohamd.abdelsattar.hamed@gmail.com',
     linkedin: 'https://www.linkedin.com/in/abd-elsattar/',
