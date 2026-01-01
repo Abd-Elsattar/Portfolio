@@ -41,8 +41,8 @@ export class Hero implements OnInit {
       cmd: 'initialize_system --env=production',
       output: [
         'Loading Core Modules...',
-        '✔ Angular 19 [Loaded]',
-        '✔ .NET 9 [Loaded]',
+        '✔ Angular [Loaded]',
+        '✔ .NET [Loaded]',
         '✔ SQL Server [Connected]',
         'System initialized successfully.'
       ]
@@ -55,7 +55,7 @@ export class Hero implements OnInit {
       cmd: 'cat skills.json | grep "Expertise"',
       output: [
         '{',
-        '  "Frontend": ["Angular", "TypeScript", "Tailwind"],',
+        '  "Frontend": ["Angular", "TypeScript"],',
         '  "Backend": ["ASP.NET Core", "Clean Architecture"],',
         '  "Database": ["EF Core", "SQL Server"]',
         '}'
